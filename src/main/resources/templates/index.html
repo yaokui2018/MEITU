@@ -1,0 +1,83 @@
+﻿#include('head.html',{title:'MEITU - 第'+page+'页'})
+</head>
+<body class="y2017 m07 d08 h16 home page pageid-62 page-author-panda page-template page-template-page-all-php bg-gray">
+#include('top.html')
+<div id="wrapper" class="hfeed">
+    <div class="topTitle">
+        <h1>$!{searchFlag==3?model.name + "·写真合集":searchFlag==1?search + "·标签":"美图欣赏"}</h1>
+        <p class="description" onclick0="location.href='/star'">
+            共检索到 ${count} 条结果$!{searchFlag==3 || searchFlag==1 ? "" : searchFlag==2 ? " —— " + search_original : " — " + search}</p>
+    </div>
+    <div class="category container">
+        #if(searchFlag==3)
+        <div style="text-align: left;">
+            <p>生日：$!{birthday}</p>
+            <p>三围：$!{model.figure}</p>
+            <p>职业：$!{model.job}</p>
+            <p>城市：$!{model.address}</p>
+            <p>兴趣：$!{model.interest}</p>
+            <p>介绍：$!{model.introduction}</p>
+        </div>
+        #end
+        <div class="row">
+            #for(photo : photoList)
+            <div class="col-xs-6 col-sm-4 col-lg-3 waterfallGrid"><a href="/detail/${photo.id}" target="_blank">
+                <div class="post-photo album">
+                    <div class="img">
+                        <div style="background-image:url('/images?path=${photo.folder}/0.jpg'); min-height: 270px;"
+                             ratio="1" realratio="1"></div>
+                    </div>
+                    <h3 class="title">${photo.title}</h3>
+                </div>
+            </a></div>
+            #end
+        </div>
+    </div>
+</div>
+<div id="pages" style="text-align: center;"></div>
+#include('footer.html')
+<script>
+    layui.use(['laypage', 'jquery', 'util', 'layer'], function () {
+        var laypage = layui.laypage, $ = layui.$, util = layui.util, layer = layui.layer;
+        laypage.render({
+            elem: 'pages'
+            , curr: ${page}
+            , count: ${count} //数据总数
+            , limit: ${size}
+            , limits: [10, 20, 40, 60, 80, 100, 300]
+            , layout: ['prev', 'page', 'next', 'limit', 'skip']
+            , jump: function (obj, first) {
+                //obj包含了当前分页的所有参数，比如：//首次不执行
+                if (!first) {
+                    //do something
+                    location.href = "/index?${url}&page=" + obj.curr + "&size=" + obj.limit;
+                }
+            }
+        });
+
+        $('.list-box dt').on('click', function () {
+            if ($(this).attr('off')) {
+                $(this).removeClass('active').siblings('dd').show()
+                $(this).attr('off', '')
+            } else {
+                $(this).addClass('active').siblings('dd').hide()
+                $(this).attr('off', true)
+            }
+        })
+
+
+        util.fixbar({  //返回顶部
+            top: true
+            , css: {right: 15, bottom: 35}
+            , bgcolor: '#393D49'
+            , click: function (type) {
+                if (type === 'top') {
+                    // layer.msg('返回顶部')
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<div class="backgroundImg" style="background-image:url(${bgImg == null? '/imgs/1.jpeg' : bgImg})"></div>
+<div id="header">
+    <div class="categoryTab-full hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-push-1 categoryTab-content no-padding">
+                    <div class="categoryTab" pandaTab tabHeight='45px' transitionTime='500' rebound='true' navigatorWidth="30px">
+                        <div class="menu-menu-1-container">
+                            <ul id="menu-menu-1" class="menu">
+                                <li class=''><a href="/index" title="网站首页">首页</a></li>
+
+                                <li class="$!{source==''?'active':''}"><a href="/index/?$!{url2}"> ALL </a></li>
+                                <li class="$!{source=='秀人网'?'active':''}"><a href="/index/?$!{url2}&source=秀人网"> 秀人网 </a></li>
+                                <li class="$!{source=='美媛馆'?'active':''}"><a href="/index/?$!{url2}&source=美媛馆"> 美媛馆 </a></li>
+                                <li class="$!{source=='嗲囡囡'?'active':''}"><a href="/index/?$!{url2}&source=嗲囡囡"> 嗲囡囡 </a></li>
+                                <li class="$!{source=='花漾'?'active':''}"><a href="/index/?$!{url2}&source=花漾"> 花漾 </a></li>
+                                <li class="$!{source=='尤蜜荟'?'active':''}"><a href="/index/?$!{url2}&source=尤蜜荟"> 尤蜜荟 </a></li>
+                                <li class="$!{source=='星颜社'?'active':''}"><a href="/index/?$!{url2}&source=星颜社"> 星颜社 </a></li>
+                                <li class="$!{source=='模范学院'?'active':''}"><a href="/index/?$!{url2}&source=模范学院"> 模范学院 </a></li>
+                                <li class="$!{source=='爱蜜社'?'active':''}"><a href="/index/?$!{url2}&source=爱蜜社"> 爱蜜社 </a></li>
+                                <li class="$!{source=='画语界'?'active':''}"><a href="/index/?$!{url2}&source=画语界"> 画语界 </a></li>
+                                <li class="$!{source=='网红馆'?'active':''}"><a href="/index/?$!{url2}&source=网红馆"> 网红馆 </a></li>
+                                <li class="$!{source=='蜜桃社'?'active':''}"><a href="/index/?$!{url2}&source=蜜桃社"> 蜜桃社 </a></li>
+                                <li><a href="/models"> 模特列表 </a></li>
+                                <li><a href="/star"> 收藏夹 </a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-sm-push-1 search"><i class="fa fa-search" aria-hidden="true"></i>
+                    <form name="searchform" class="sidebar-searchform" id="searchform" action="/index?search/" method="get">
+                        <div class="main sidebar-search">
+                            <input class="searchInput" type="text" id="s" name="search" value="$!{searchFlag==2?search_original:search}" placeholder="输入关键字">
+                            <input class="searchIcon" type="submit" value="&#xf002" id="searchsubmit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile visible-xs-block"><!-- header/mobile -->
+        <div class="container">
+            <div class="col-xs-2 menu no-padding">
+                <div class="menu-icon">
+                    <div class="bread bread1"></div>
+                    <div class="bread bread2"></div>
+                    <div class="bread bread3"></div>
+                </div>
+                <div class="menu-list">
+                    <div class="list">
+                        <div class="menu-menu-1-container">
+                            <ul id="menu-menu-2" class="menu">
+                                <li class=''><a href="/index" title="网站首页">首页</a></li>
+
+                                <li class="$!{source==''?'active':''}"><a href="/index/?$!{url2}"> ALL </a></li>
+                                <li class="$!{source=='秀人网'?'active':''}"><a href="/index/?$!{url2}&source=秀人网"> 秀人网 </a></li>
+                                <li class="$!{source=='美媛馆'?'active':''}"><a href="/index/?$!{url2}&source=美媛馆"> 美媛馆 </a></li>
+                                <li class="$!{source=='嗲囡囡'?'active':''}"><a href="/index/?$!{url2}&source=嗲囡囡"> 嗲囡囡 </a></li>
+                                <li class="$!{source=='花漾'?'active':''}"><a href="/index/?$!{url2}&source=花漾"> 花漾 </a></li>
+                                <li class="$!{source=='尤蜜荟'?'active':''}"><a href="/index/?$!{url2}&source=尤蜜荟"> 尤蜜荟 </a></li>
+                                <li class="$!{source=='星颜社'?'active':''}"><a href="/index/?$!{url2}&source=星颜社"> 星颜社 </a></li>
+                                <li class="$!{source=='模范学院'?'active':''}"><a href="/index/?$!{url2}&source=模范学院"> 模范学院 </a></li>
+                                <li class="$!{source=='爱蜜社'?'active':''}"><a href="/index/?$!{url2}&source=爱蜜社"> 爱蜜社 </a></li>
+                                <li class="$!{source=='画语界'?'active':''}"><a href="/index/?$!{url2}&source=画语界"> 画语界 </a></li>
+                                <li class="$!{source=='网红馆'?'active':''}"><a href="/index/?$!{url2}&source=网红馆"> 网红馆 </a></li>
+                                <li class="$!{source=='蜜桃社'?'active':''}"><a href="/index/?$!{url2}&source=蜜桃社"> 蜜桃社 </a></li>
+                                <li><a href="/models"> 模特列表 </a></li>
+                                <li><a href="/star"> 收藏夹 </a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-10 mobileSearch"><i class="fa fa-search" aria-hidden="true"></i>
+                <form name="searchform" class="sidebar-searchform" id="searchform" action="/index" method="get">
+                    <div class="main sidebar-search">
+                        <input class="searchInput" type="text" name="search" value="$!{searchFlag==2?search_original:search}" placeholder="输入关键字">
+                        <input class="searchIcon" type="submit" value="" id="searchsubmit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #header -->

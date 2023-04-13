@@ -1,0 +1,73 @@
+﻿#include('head.html',{title:'模特 - 第'+page+'页'})
+</head>
+<body class="y2017 m07 d08 h16 home page pageid-62 page-author-panda page-template page-template-page-all-php bg-gray">
+#include('top.html')
+<div id="wrapper" class="hfeed">
+    <div class="topTitle">
+        <h1>模特列表</h1>
+        <p class="description" onclick="location.href='/star'">
+            共检索到 ${count} 条结果</p>
+    </div>
+    <div class="category container">
+        <div class="row">
+            #for(model : modelList)
+            <div class="col-xs-6 col-sm-4 col-lg-3 waterfallGrid"><a href="/index?search=model@${model.id}" target="_blank">
+                <div class="post-photo album">
+                    <div class="img">
+                        <div style="background-image:url('/images?path=${photoList[for.index-1].folder}/0.jpg'); min-height: 270px;"
+                             ratio="1" realratio="1"></div>
+                    </div>
+                    <h3 class="title">${model.name}</h3>
+                </div>
+            </a></div>
+            #end
+        </div>
+    </div>
+</div>
+<div id="pages" style="text-align: center;"></div>
+#include('footer.html')
+<script>
+    layui.use(['laypage', 'jquery', 'util', 'layer'], function () {
+        var laypage = layui.laypage, $ = layui.$, util = layui.util, layer = layui.layer;
+        laypage.render({
+            elem: 'pages'
+            , curr: ${page}
+            , count: ${count} //数据总数
+            , limit: ${size}
+            , limits: [10, 20, 40, 60, 80, 100, 300]
+            , layout: ['prev', 'page', 'next', 'limit', 'skip']
+            , jump: function (obj, first) {
+                //obj包含了当前分页的所有参数，比如：//首次不执行
+                if (!first) {
+                    //do something
+                    location.href = "/models?page=" + obj.curr + "&size=" + obj.limit;
+                }
+            }
+        });
+
+        $('.list-box dt').on('click', function () {
+            if ($(this).attr('off')) {
+                $(this).removeClass('active').siblings('dd').show()
+                $(this).attr('off', '')
+            } else {
+                $(this).addClass('active').siblings('dd').hide()
+                $(this).attr('off', true)
+            }
+        })
+
+
+        util.fixbar({  //返回顶部
+            top: true
+            , css: {right: 15, bottom: 35}
+            , bgcolor: '#393D49'
+            , click: function (type) {
+                if (type === 'top') {
+                    // layer.msg('返回顶部')
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

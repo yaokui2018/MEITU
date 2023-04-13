@@ -1,0 +1,180 @@
+﻿#include('head.html',{title: photo.title})
+<style>
+    .topTitle {
+        width: 1000px;
+        max-width: 95%;
+        margin: 0 auto;
+    }
+
+    .post-content {
+        background: none;
+    }
+
+    article {
+        text-align: center;
+    }
+
+    article img {
+        max-width: 100%;
+        height: auto;
+        width: 520px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body class="y2017 m07 d09 h01 single postid-55 s-y2017 s-m06 s-d29 s-h22 s-author-panda bg-gray">
+#include('top.html')
+<div id="wrapper" class="hfeed">
+    <div class="topTitle">
+        <h1>$!{photo.title}</h1>
+        <p class="description">$!{photo.description}</p>
+        <p>发布：$!{date} / 爬取：$!{updateTime}</p>
+        <div style="text-align: left">
+            <p>模特：<a href="/index?search=model@${model.id}">$!{model.name}</a></p>
+            <p>生日：$!{birthday}</p>
+            <p>三围：$!{model.figure}</p>
+            <p>职业：$!{model.job}</p>
+            <p>城市：$!{model.address}</p>
+            <p>兴趣：$!{model.interest}</p>
+            <p>介绍：$!{model.introduction}</p>
+        </div>
+        <a href="/index?source=${source}">${source}</a> /
+        <span class="layui-breadcrumb" lay-separator="|">
+          #for(tag:tags)
+          <a href="/index?search=tag@${tag}">${tag}</a>
+          #end
+        </span>
+        <button type="button" style="margin-left: 10px; display: none;" id="starBtn"
+                class="layui-btn layui-btn-primary layui-btn-xs">收藏
+        </button>
+        <button type="button" style="margin-left: 10px; display: none;" id="cancelStarBtn"
+                class="layui-btn layui-btn-primary layui-btn-xs">已收藏
+        </button>
+    </div>
+    <div class="category container">
+        <div class="row">
+            <div class="c0ol-lg-12">
+                <div class="post-content">
+                    <article>
+                        <!--<div pandaPicshow='enable'>-->
+                        <!--<div class="showBox cover" ratio="1.7778"></div>-->
+                        <!--<div class="thumbnails">-->
+                        <!--<a fullsize="/images/?path=.jpg" thumbnail="/images/?path=.jpg">-->
+                        <!--<img src="/images/?path=" />-->
+                        <!--</a>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        #for(int index : range(1, photo.count))
+                        <a href="/images/?path=${photo.folder}/${index}.jpg" target="_blank"><img
+                                src="/images/?path=${photo.folder}/${index}.jpg"/></a>
+                        #end
+                        <div class="col-xs-12 model sxy">
+                            <ul class="row">
+                                #if(prePhoto != null)
+                                <div class="post-previous twofifth"> 上一篇：<a href="/detail/${prePhoto.id}">${prePhoto.title}</a>
+                                </div>
+                                #end
+                                #if(nextPhoto != null)
+                                <div class="post-next twofifth"> 下一篇：<a href="/detail/${nextPhoto.id}">${nextPhoto.title}</a>
+                                </div>
+                                #end
+                                <a href="https://meirentu.top/pic/${photo.folder}.html" target="_blank">数据来源</a>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+                <!--<div class="xiangguan">-->
+                <!--<div class="">-->
+                <!--<div class="row">-->
+
+                <!--<div class="col-xs-6 col-sm-4 col-lg-3 waterfallGrid"><a href="/"-->
+                <!--target="_blank">-->
+                <!--<div class="post-photo album">-->
+                <!--<div class="img">-->
+                <!--<div style="background-image:url(images/1633311445626466.jpeg);" ratio="1"-->
+                <!--realratio="1"></div>-->
+                <!--</div>-->
+                <!--<h3 class="title">测试数据</h3>-->
+                <!--</div>-->
+                <!--</a></div>-->
+
+                <!--<div class="col-xs-6 col-sm-4 col-lg-3 waterfallGrid"><a href="/"-->
+                <!--target="_blank">-->
+                <!--<div class="post-photo album">-->
+                <!--<div class="img">-->
+                <!--<div style="background-image:url(images/1633309704315391.jpeg);" ratio="1"-->
+                <!--realratio="1"></div>-->
+                <!--</div>-->
+                <!--<h3 class="title">图片2</h3>-->
+                <!--</div>-->
+                <!--</a></div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+            #include('footer.html')
+        </div>
+    </div>
+    <div class="mainPageNav"></div>
+</div>
+<script>
+
+    layui.use(['element', 'jquery', 'util', 'layer'], function () {
+
+        layui.util.fixbar({  //返回顶部
+            top: true
+            , css: {right: 15, bottom: 35}
+            , bgcolor: '#393D49'
+            , click: function (type) {
+                if (type === 'top') {
+                    // layer.msg('返回顶部')
+                }
+            }
+        });
+
+    });
+</script>
+<script>
+    var info = {id: ${photo.id}, folder: "${photo.folder}", title: "${photo.title}"};
+    info = JSON.stringify(info);
+
+    var stars = $.cookie('MEITU_STARS');
+    if (stars == undefined) {
+        stars = [];
+        $("#starBtn").show();
+        $("#cancelStarBtn").hide();
+    }
+    else {
+        stars = JSON.parse(stars);
+        // alert(stars, info);
+
+        if (stars.includes(info)) {
+            $("#starBtn").hide();
+            $("#cancelStarBtn").show();
+        }
+        else {
+            $("#starBtn").show();
+            $("#cancelStarBtn").hide();
+        }
+    }
+    $("#starBtn").click(function () {
+        stars.push(info);
+        $.removeCookie('MEITU_STARS');
+        $.cookie("MEITU_STARS", JSON.stringify(stars), {expires: 9999, path: "/"});
+        $("#starBtn").hide();
+        $("#cancelStarBtn").show();
+        console.log(stars);
+    });
+
+    $("#cancelStarBtn").click(function () {
+        stars.splice(stars.indexOf(info), 1);
+        $.removeCookie('MEITU_STARS');
+        $.cookie("MEITU_STARS", JSON.stringify(stars), {expires: 9999, path: "/"});
+        $("#starBtn").show();
+        $("#cancelStarBtn").hide();
+        console.log(stars, info, stars.indexOf(info));
+    });
+
+</script>
+</body>
+</html>

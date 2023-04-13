@@ -1,0 +1,76 @@
+﻿#include('head.html',{title:'MEITU - 收藏'})
+<style>
+    @media (min-width: 768px) {
+        .col-sm-10 {
+            width: 88.33333333%;
+        }
+    }
+</style>
+</head>
+<body class="y2017 m07 d08 h16 home page pageid-62 page-author-panda page-template page-template-page-all-php bg-gray">
+#include('top.html')
+<div id="wrapper" class="hfeed">
+    <div class="topTitle">
+        <h1>收藏</h1>
+        <p class="description">共有<span id="starNum">-</span>条收藏</p>
+    </div>
+    <div class="category container">
+        <div class="row" id="pics">
+        </div>
+    </div>
+</div>
+<div id="pages" style="text-align: center;"></div>
+#include('footer.html')
+<script>
+    var stars = $.cookie('MEITU_STARS');
+    if (stars == undefined) {
+        stars = [];
+    }
+    stars = JSON.parse(stars);
+    $("#starNum").text(stars.length);
+    var html = "";
+    for(let i=0; i<stars.length; ++i){
+        let star = JSON.parse(stars[i]);
+        console.log(star);
+        html = "<div class=\"col-xs-6 col-sm-4 col-lg-3 waterfallGrid\"><a href=\"/detail/"+ star["id"] +"\" target=\"_blank\">\n" +
+            "                <div class=\"post-photo album\">\n" +
+            "                    <div class=\"img\">\n" +
+            "                        <div style=\"background-image:url('/images?path=" + star["folder"] +"/0.jpg'); min-height: 270px;\"\n" +
+            "                             ratio=\"1\" realratio=\"1\"></div>\n" +
+            "                    </div>\n" +
+            "                    <h3 class=\"title\">"+ star["title"] +"</h3>\n" +
+            "                </div>\n" +
+            "            </a></div>";
+        $("#pics").append(html);
+    }
+</script>
+<script>
+    layui.use(['laypage', 'jquery', 'util', 'layer'], function () {
+        $ = layui.$, util = layui.util, layer = layui.layer;
+
+        $('.list-box dt').on('click', function () {
+            if ($(this).attr('off')) {
+                $(this).removeClass('active').siblings('dd').show()
+                $(this).attr('off', '')
+            } else {
+                $(this).addClass('active').siblings('dd').hide()
+                $(this).attr('off', true)
+            }
+        })
+
+
+        util.fixbar({  //返回顶部
+            top: true
+            , css: {right: 15, bottom: 35}
+            , bgcolor: '#393D49'
+            , click: function (type) {
+                if (type === 'top') {
+                    // layer.msg('返回顶部')
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
