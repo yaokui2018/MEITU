@@ -1,5 +1,6 @@
 package cn.bhshare.meitu.hook;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -18,6 +19,7 @@ import static cn.bhshare.meitu.util.GetIpAddr.getIpAddr;
  * 替代EmbeddedServletContainerCustomizer在war中不起作用的方法
  */
 @Component
+@Slf4j
 public class ErrorPageInterceptor extends HandlerInterceptorAdapter {
     private List<Integer> errorCodeList = Arrays.asList(400, 404, 403, 500, 501);
 
@@ -26,7 +28,7 @@ public class ErrorPageInterceptor extends HandlerInterceptorAdapter {
             Exception {
         if (!(request.getRequestURI().contains("/images") || request.getRequestURI().contains("/layui/") || request.getRequestURI().contains("/css/")
                 || request.getRequestURI().contains("/js/") || request.getRequestURI().contains("/fonts/"))) {
-            System.out.println("//////////////////////// IP: " + getIpAddr(request) + ", " + request.getRequestURI());
+            log.info("-------------------- IP: " + getIpAddr(request) + ", 访问页面：" + request.getRequestURI() + " --------------------");
         }
         if (errorCodeList.contains(response.getStatus())) {
             response.sendRedirect("/error/" + response.getStatus());
