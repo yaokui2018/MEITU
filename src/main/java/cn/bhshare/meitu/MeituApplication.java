@@ -21,7 +21,7 @@ import java.util.Enumeration;
 @Slf4j
 public class MeituApplication extends SpringBootServletInitializer {
 
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) {
         ConfigurableApplicationContext application = SpringApplication.run(MeituApplication.class, args);
         System.out.println("项目启动成功 *^_^* \n" + " .-------.       ____     __        \n"
                 + " |  _ _   \\      \\   \\   /  /    \n" + " | ( ' )  |       \\  _. /  '       \n"
