@@ -1,4 +1,9 @@
 # MEITU
+![GitHub last commit](https://img.shields.io/github/last-commit/yaokui2018/MEITU)
+![GitHub language count](https://img.shields.io/github/languages/count/yaokui2018/MEITU)
+![GitHub top language](https://img.shields.io/github/languages/top/yaokui2018/MEITU)
+![visitor badge](https://thread-erratic-podium.glitch.me/badge?page_id=yaokui2018.MEITU)
+
 美图欣赏
 
 ## 数据库
