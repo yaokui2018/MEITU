@@ -1,5 +1,6 @@
 package cn.bhshare.meitu;
 
+import cn.bhshare.meitu.util.ConsoleQRcode;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +14,6 @@ import org.springframework.util.StringUtils;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 @SpringBootApplication
@@ -40,6 +40,7 @@ public class MeituApplication extends SpringBootServletInitializer {
                 "Local访问网址: \t\thttp://localhost:" + port + path + "\n\t");
         try {
             Enumeration<NetworkInterface> nifs = NetworkInterface.getNetworkInterfaces();
+            boolean shouldPrintQRcode = true;
             while (nifs.hasMoreElements()) {
                 NetworkInterface nif = nifs.nextElement();
                 Enumeration<InetAddress> address = nif.getInetAddresses();
@@ -50,6 +51,10 @@ public class MeituApplication extends SpringBootServletInitializer {
                     InetAddress addr = address.nextElement();
                     if (addr instanceof Inet4Address) {
                         System.out.println("\tExternal访问网址(" + nif.getName() + "): \thttp://" + addr.getHostAddress() + ":" + port + path);
+                        if (shouldPrintQRcode) { // 仅打印第一个外部网址
+                            ConsoleQRcode.printQRcode("http://" + addr.getHostAddress() + ":" + port + path);
+                            shouldPrintQRcode = false;
+                        }
                     }
                 }
             }
